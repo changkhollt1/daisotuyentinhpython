@@ -10,7 +10,7 @@ class MaTran:
         #     for j in range(0,n):
         #         hang.append(int(input('nhap phan tu thu %d cua hang %d: '%(j,i))))
         #     self.matrix_full.append(hang)
-        self.matrix_full.append([0, 4, 2, 6])
+        self.matrix_full.append([0, 0, 0, 6])
         self.matrix_full.append([5, 8, 3, 5])
         self.matrix_full.append([0, 1, 4, 9])
 
@@ -38,44 +38,46 @@ class MaTran:
     #     for cotj in range(self.cot):
     #         self.check_bien_chinh(cotj)
     def check_khackhong(self, arr):
-        i = 0
         for aij_check in arr:
             if aij_check !=0:
                 print(aij_check)
-                return i
-            i = i + 1
-        return -1
+                return aij_check
+        return None
     def biendoi_bacthang(self):
         j = 0
         for i in range(self.hang):
             # hoan vi hang khac 0 
             while(True):
-                
+                print('j la %d, i la %d'  %(j,i))
                 cotj = self.get_cot(j)
                 # xet diem moc khac 0
-                i_moc = self.check_khackhong(cotj[i:])
+                i_moc_value = self.check_khackhong(cotj[i:])
                 
-                if(i_moc != -1):
-                    self.swap_hang(i,i_moc)                   
+                if(i_moc_value is not None):
+                    self.swap_hang(i,cotj.index(i_moc_value))                   
                     break               
                 else: 
                     if(j >= self.cot):
                         break
                     j = j + 1
                 
-            j = j + 1
-    
-           
-            
-
+            j = j + 1          
 # main 
 # n = int(input('nhap so cot'))
 # m = int(input('nhap so hang'))
-m = 4
-n = 3
+m = 3
+n = 4
 matrix = MaTran(m,n)
 print(matrix.matrix_full)
 matrix.biendoi_bacthang()
 print(matrix.matrix_full)
-arr = [1,2,3,4]
-print(arr[2:])
+# arr = [1,1,3,0, 1, 1,2]
+# print(arr[2:])
+# def test(i, arr):
+#     for a in arr[i:]:
+#         if a == 0:
+#             return a
+#     return None
+# a = test(2, arr)
+# if a is None: 
+#     print('ko co so ko nao')
